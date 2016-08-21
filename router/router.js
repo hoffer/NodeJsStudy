@@ -1,12 +1,16 @@
 ﻿var url = require("url");
 
-var testPromise = require("../controller/testPromise");
+var testPromiseSimple = require("../controller/testPromiseSimple");
 
 function route(req, res) {
     var pathname = url.parse(req.url).pathname;
     console.log("About to route a request for " + pathname);
-    if (pathname.startsWith("/testPromise")) {
-        testPromise.TestPromise();
+    if (pathname.startsWith("/testPromiseSimple")) {
+        testPromiseSimple.TestPromise(res);
+    }
+    else {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Unknown Route\n');
     }
 }
 
