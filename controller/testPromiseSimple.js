@@ -6,12 +6,12 @@ function NewTestPromise(res, testValue) {
         console.log(logText);
         res.write(logText);
         if (testValue === true) {
-            console.log("Resolved");
-            resolve("Resolved");
+            console.log("Resolve Promise...");
+            resolve("Resolve Promise...");
         }
         else {
-            console.log("Rejected");
-            reject("Rejected");
+            console.log("Reject Promise...");
+            reject("Reject Promise...");
         }
     });
 }
@@ -19,12 +19,12 @@ function NewTestPromise(res, testValue) {
 function TestPromise(res) {
     res.writeHead(200, { "Content-Type": "text/plain" });
     NewTestPromise(res, true).then(value => {
-        console.log("Fullfilled with value:" + value);
-        res.write("Fullfilled with value:" + value);
+        console.log("Promise Fullfilled with value:" + value);
+        res.write("Promise Fullfilled with value:" + value);
         res.end();
     }).catch(err => {
-        console.log("Rejected with err:" + err);
-        res.write("Rejected with err:" + err);
+        console.log("Promise Rejected with err:" + err);
+        res.write("Promise Rejected with err:" + err);
         res.end();
     });
 }
