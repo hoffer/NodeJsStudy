@@ -1,30 +1,33 @@
 ﻿const util = require('util');
 
-function NewTestPromise(res, testValue) {
+function GetDateNowString() {
+    currentDate = Date(Date.now());
+    return currentDate.toString();
+}
+
+function NewTestPromise(res) {
     return new Promise(function (resolve, reject) {
-        logText = util.format("Execute Promise with test value=%d\n", testValue);
+        logText = util.format(GetDateNowString() + " Execute Promise...\n");
         console.log(logText);
         res.write(logText);
-        if (testValue === true) {
-            console.log("Resolve Promise...");
-            resolve("Resolve Promise...");
-        }
-        else {
-            console.log("Reject Promise...");
-            reject("Reject Promise...");
-        }
+        logText = util.format(GetDateNowString() + " Resolve Promise...\n");
+        console.log(logText);
+        resolve(logText);
     });
 }
 
 function TestPromise(res) {
     res.writeHead(200, { "Content-Type": "text/plain" });
-    NewTestPromise(res, true).then(value => {
-        console.log("Promise Fullfilled with value:" + value);
-        res.write("Promise Fullfilled with value:" + value);
+    NewTestPromise(res).then(value => {
+        res.write(value);
+        logText = util.format(GetDateNowString() + " Promise Fullfilled\n");
+        console.log(logText);
+        res.write(logText);
         res.end();
     }).catch(err => {
-        console.log("Promise Rejected with err:" + err);
-        res.write("Promise Rejected with err:" + err);
+        logText = util.format(GetDateNowString() + " Promise Rejected\n");
+        console.log(logText);
+        res.write(logText);
         res.end();
     });
 }

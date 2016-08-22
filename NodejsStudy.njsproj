@@ -30,6 +30,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller\testPromiseParallel.js" />
+    <Compile Include="controller\testPromiseChain.js" />
     <Compile Include="controller\testPromiseDelay.js" />
     <Compile Include="controller\testPromiseSimple.js" />
     <Compile Include="router\router.js" />
